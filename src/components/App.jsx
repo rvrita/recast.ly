@@ -1,6 +1,11 @@
 import VideoList from './VideoList.js';
 import exampleVideoData from '../data/exampleVideoData.js';
 import VideoPlayer from './VideoPlayer.js';
+import searchYouTube from '../lib/searchYouTube.js';
+
+// searchYouTube(null, (data) => {
+//   console.log(data)
+// })
 
 class App extends React.Component {
   constructor(props) {
@@ -9,6 +14,7 @@ class App extends React.Component {
       video: exampleVideoData[0],
       videos: exampleVideoData
     };
+    // console.log(searchYouTube());
   }
 
   handleClick(video) {
