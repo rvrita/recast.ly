@@ -2,7 +2,7 @@ import VideoList from './VideoList.js';
 import exampleVideoData from '../data/exampleVideoData.js';
 import VideoPlayer from './VideoPlayer.js';
 import searchYouTube from '../lib/searchYouTube.js';
-
+import Search from './Search.js';
 // searchYouTube(null, (data) => {
 //   console.log(data)
 // })
@@ -29,7 +29,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <Search search={}/>
           </div>
         </nav>
         <div className="row">

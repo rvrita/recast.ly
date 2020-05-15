@@ -10,8 +10,7 @@ var searchYouTube = (options, callback) => {
       type: 'video',
       videoEmbeddable: true
     },
-    success: function(data) {
-      callback(data.items) },
+    success: function(data) { callback(data.items); },
     error: function(error) {
       console.error('Failed to fetch messages', error);
     }
