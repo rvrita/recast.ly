@@ -8,13 +8,14 @@ class App extends React.Component {
     this.state = {
       video: exampleVideoData[0],
       videos: exampleVideoData
-    }
+    };
   }
 
-  handleClick() {
-    console.log(this)
+  handleClick(video) {
+    console.log(video);
     this.setState({
-    })
+      video: video
+    });
   }
 
   render () {
@@ -27,14 +28,14 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={exampleVideoData[0]}/>
+            <VideoPlayer video={this.state.video}/>
           </div>
           <div className="col-md-5">
-            <VideoList videos={exampleVideoData} handleClick={props.handleClick}/>
+            <VideoList videos={exampleVideoData} handleClick={this.handleClick.bind(this)}/>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
