@@ -1,31 +1,21 @@
 import VideoList from './VideoList.js';
 import exampleVideoData from '../data/exampleVideoData.js';
 import VideoPlayer from './VideoPlayer.js';
-// import searchYouTube from '../lib/searchYouTube.js';
 import Search from './Search.js';
 import YOUTUBE_API_KEY from '../config/youtube.js';
-// searchYouTube(null, (data) => {
-//   console.log(data)
-// })
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.searchYouTube = _.debounce(this.props.searchYouTube, 500);
-    this.searchYouTube({
-      query: '',
-      max: 5,
-      key: YOUTUBE_API_KEY
-    }, (data) => { this.setState({ videos: data }); });
+    this.searchYouTube = _.debounce(this.props.searchYouTube, 500, {leading: true});
     this.state = {
       video: exampleVideoData[0],
-      videos: exampleVideoData,
+      videos: [],
       inputValue: ''
     };
   }
 
   handleClick(video) {
-    console.log(video);
     this.setState({
       video: video
     });
@@ -33,11 +23,16 @@ class App extends React.Component {
 
   updateInputValue(event) {
     this.state.inputValue = event.target.value;
-    console.log(this.state.inputValue);
+    this.searchYouTube(
+      {
+        query: this.state.inputValue,
+        max: 5,
+        key: YOUTUBE_API_KEY
+      }, (data) => { this.setState({ videos: data }); }
+    );
   }
 
   handleSubmit() {
-    console.log('hello');
     this.searchYouTube(
       {
         query: this.state.inputValue,
@@ -48,7 +43,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    searchYouTube(
+    this.props.searchYouTube(
       {
         query: '',
         max: 5,
@@ -77,24 +72,6 @@ class App extends React.Component {
     );
   }
 }
-
-// var App = () => (
-//   <div>
-//     <nav className="navbar">
-//       <div className="col-md-6 offset-md-3">
-//         <div><h5><em>search</em> view goes here</h5></div>
-//       </div>
-//     </nav>
-//     <div className="row">
-//       <div className="col-md-7">
-//         <VideoPlayer video={exampleVideoData[0]}/>
-//       </div>
-//       <div className="col-md-5">
-//         <VideoList videos={exampleVideoData}/>
-//       </div>
-//     </div>
-//   </div>
-// );
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
